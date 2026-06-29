@@ -56,7 +56,7 @@ The proxy forwards them to the remote backend and adjusts CORS response headers.
 
 - The proxy strips the configured prefix before forwarding requests to the target.
 - If the client request does not include an `Origin` header, the configured fallback origin is used.
-- `credentials: 'include'` is required on the client side to send cookies through the proxy.
+- `credentials: 'include'` is required on the client side if you want to send cookies through the proxy.
   ```javascript
   fetch('http://localhost:8010/proxy/endpoint', {
     method: 'GET',
