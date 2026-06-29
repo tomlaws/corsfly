@@ -62,12 +62,13 @@ export function startProxy({
         delete proxyRes.headers['access-control-allow-credentials'];
         delete proxyRes.headers['access-control-allow-methods'];
         delete proxyRes.headers['access-control-allow-headers'];
+        delete proxyRes.headers['access-control-expose-headers'];
 
         proxyRes.headers['access-control-allow-origin'] = actualOrigin;
         proxyRes.headers['access-control-allow-credentials'] = 'true';
-        if (req.headers['access-control-request-headers']) {
-          proxyRes.headers['access-control-allow-headers'] = req.headers['access-control-request-headers'] as string;
-        }
+        proxyRes.headers['access-control-allow-methods'] = 'GET,POST,PUT,PATCH,DELETE,OPTIONS';
+        proxyRes.headers['access-control-allow-headers'] = '*';
+        proxyRes.headers['access-control-expose-headers'] = '*';
       },
       error: (err, req, res) => {
         console.error(pc.red(`Proxy Error: ${err.message}`));
