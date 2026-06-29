@@ -69,6 +69,21 @@ export function startProxy({
         proxyRes.headers['access-control-allow-methods'] = 'GET,POST,PUT,PATCH,DELETE,OPTIONS';
         proxyRes.headers['access-control-allow-headers'] = '*';
         proxyRes.headers['access-control-expose-headers'] = '*';
+
+        if (rewriteCookies) {
+          const setCookieHeader = proxyRes.headers['set-cookie'];
+          if (setCookieHeader) {
+            proxyRes.headers['set-cookie'] = setCookieHeader.map(cookie => {
+              // 1. Strip out the "Secure" flag so unencrypted http://localhost can accept it
+              let modifiedCookie = cookie.replace(/;?\s*Secure/gi, '');
+
+              // 2. Convert Lax/Strict to None so the cookie flows across different local ports (e.g., :3000 to :8010)
+              modifiedCookie = modifiedCookie.replace(/SameSite=(Lax|Strict)/gi, 'SameSite=None');
+
+              return modifiedCookie;
+            });
+          }
+        }
       },
       error: (err, req, res) => {
         console.error(pc.red(`Proxy Error: ${err.message}`));
