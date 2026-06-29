@@ -36,7 +36,7 @@ corsfly --targetUrl https://example.com
 - `--proxyPath <string>` - proxy URL prefix (default: `proxy`)
 - `-o, --origin <string>` - fallback Origin header when missing (default: `*`)
 - `-c, --rewriteCookies` - enable cookie rewrite to bypass strict SameSite restrictions
-- `--no-proxy` - disable automatic upstream proxy detection from `HTTP_PROXY` / `HTTPS_PROXY`. Upstream proxy detection is enabled by default to facilitate corporate network environments.
+- `--proxy` - enable automatic upstream proxy detection from `HTTP_PROXY` / `HTTPS_PROXY`. Upstream proxy detection is enabled by default to facilitate corporate network environments.
 
 ### Example
 
