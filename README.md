@@ -34,9 +34,9 @@ corsfly --targetUrl https://example.com
 - `-t, --targetUrl <url>` (required) - remote backend server URL
 - `-p, --port <number>` - local proxy port (default: `8010`)
 - `--proxyPath <string>` - proxy URL prefix (default: `proxy`)
-- `-o, --origin <string>` - fallback Origin header when missing (default: `http://localhost:3000`)
+- `-o, --origin <string>` - fallback Origin header when missing (default: `*`)
 - `-c, --rewriteCookies` - enable cookie rewrite to bypass strict SameSite restrictions
-- `--no-proxy` - disable automatic upstream proxy detection from `HTTP_PROXY` / `HTTPS_PROXY`
+- `--no-proxy` - disable automatic upstream proxy detection from `HTTP_PROXY` / `HTTPS_PROXY`. Upstream proxy detection is enabled by default to facilitate corporate network environments.
 
 ### Example
 
