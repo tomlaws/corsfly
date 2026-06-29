@@ -36,7 +36,7 @@ corsfly --targetUrl https://example.com
 - `--proxyPath <string>` - proxy URL prefix (default: `proxy`)
 - `-o, --origin <string>` - fallback Origin header when missing (default: `*`)
 - `-c, --rewriteCookies` - enable cookie rewrite to bypass strict SameSite restrictions
-- `--proxy` - enable automatic upstream proxy detection from `HTTP_PROXY` / `HTTPS_PROXY`. Upstream proxy detection is enabled by default to facilitate corporate network environments.
+- `--proxy` - enable automatic upstream proxy detection from `HTTP_PROXY` / `HTTPS_PROXY`. This is useful if your network requires a proxy to reach the target backend. (default: `false`)
 
 ### Example
 
@@ -56,6 +56,13 @@ The proxy forwards them to the remote backend and adjusts CORS response headers.
 
 - The proxy strips the configured prefix before forwarding requests to the target.
 - If the client request does not include an `Origin` header, the configured fallback origin is used.
+- `credentials: 'include'` is required on the client side to send cookies through the proxy.
+  ```javascript
+  fetch('http://localhost:8010/proxy/endpoint', {
+    method: 'GET',
+    credentials: 'include', // 👈 Mandatory
+  });
+  ```
 
 ## License
 

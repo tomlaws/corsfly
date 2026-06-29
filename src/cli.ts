@@ -7,7 +7,7 @@ program
   .option('--proxyPath <string>', 'The URL path prefix segment to route through', 'proxy')
   .option('-o, --origin <string>', 'Fallback origin to use if the incoming request lacks an Origin header', '*')
   .option('-c, --rewriteCookies', 'Bypass strict cross-domain SameSite cookie restrictions')
-  .option('--proxy', 'Enable automatic detection of system HTTP_PROXY/HTTPS_PROXY environment variables', true)
+  .option('--proxy', 'Enable automatic detection of system HTTP_PROXY/HTTPS_PROXY environment variables', false)
   .parse(process.argv);
 
 const options = program.opts();
