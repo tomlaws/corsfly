@@ -23,10 +23,19 @@ npm install
 
 ## Usage
 
-Run the proxy with a remote `targetUrl`:
+Build and run the proxy command:
 
 ```bash
-npx tsx src/cli.ts --targetUrl https://example.com
+npm install
+npm run build
+npx corsfly --targetUrl https://example.com
+```
+
+If you install globally or link the package, invoke it directly:
+
+```bash
+npm link
+corsfly --targetUrl https://example.com
 ```
 
 ### CLI options
@@ -60,8 +69,17 @@ The proxy forwards them to the remote backend and adjusts CORS response headers.
 
 ## Development
 
+During development, run the source directly:
+
 ```bash
 npx tsx src/cli.ts --targetUrl https://example.com
+```
+
+After building, use the installed `corsfly` command:
+
+```bash
+npm run build
+npx corsfly --targetUrl https://example.com
 ```
 
 ## License
