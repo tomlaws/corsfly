@@ -33,29 +33,31 @@ corsfly --targetUrl https://example.com
 
 - `-t, --targetUrl <url>` (required) - remote backend server URL
 - `-p, --port <number>` - local proxy port (default: `8010`)
-- `--proxyPath <string>` - proxy URL prefix (default: `proxy`)
+- `-P, --proxyPath <string>` - proxy URL prefix (default: `/`, which proxies from root)
 - `-o, --origin <string>` - fallback Origin header when missing (default: `*`)
-- `-c, --rewriteCookies` - enable cookie rewrite to bypass strict SameSite restrictions
-- `--proxy` - enable automatic upstream proxy detection from `HTTP_PROXY` / `HTTPS_PROXY`. This is useful if your network requires a proxy to reach the target backend. (default: `false`)
+- `-c, --credentials` - enable credentialed CORS responses (`Access-Control-Allow-Credentials: true`)
+- `-r, --rewriteCookies` - rewrite response cookies for local development compatibility
+- `-x, --proxy` - enable automatic upstream proxy detection from `HTTP_PROXY` / `HTTPS_PROXY`. This is useful if your network requires a proxy to reach the target backend. (default: `false`)
 
 ### Example
 
 ```bash
-npx corsfly -t https://api.example.com -p 8010 --proxyPath proxy --rewriteCookies
+npx corsfly -t https://api.example.com -p 8010 -r
 ```
 
 Then send requests to:
 
 ```text
-http://localhost:8010/proxy/...
+http://localhost:8010/...
 ```
 
 The proxy forwards them to the remote backend and adjusts CORS response headers.
 
 ## Notes
 
-- The proxy strips the configured prefix before forwarding requests to the target.
+- The proxy path defaults to root (`/`). Set `-P` if you want a dedicated prefix.
 - If the client request does not include an `Origin` header, the configured fallback origin is used.
+- Do not use `--credentials` with `--origin *`; supply a specific origin such as `http://localhost:3000`.
 - `credentials: 'include'` is required on the client side if you want to send cookies through the proxy.
   ```javascript
   fetch('http://localhost:8010/proxy/endpoint', {
