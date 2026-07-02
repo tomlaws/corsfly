@@ -42,7 +42,7 @@ corsfly --targetUrl https://example.com
 ### Example
 
 ```bash
-npx corsfly -t https://api.example.com -p 8010 -r
+npx corsfly -t https://google.com -p 8010 -r
 ```
 
 Then send requests to:
