@@ -20,13 +20,13 @@ A small Node.js proxy utility for enabling cross-origin requests to a target bac
 Run the command:
 
 ```bash
-npx corsfly --targetUrl https://example.com
+npx corsfly --targetUrl https://google.com
 ```
 
 If you install globally via `npm install -g corsfly`, invoke it directly:
 
 ```bash
-corsfly --targetUrl https://example.com
+corsfly --targetUrl https://google.com
 ```
 
 ### CLI options
