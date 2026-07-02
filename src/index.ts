@@ -114,6 +114,11 @@ export function startProxy({
         const requestAllowHeaders = req.headers['access-control-request-headers'];
         const existingVary = proxyRes.headers['vary'];
 
+        // Avoid sticky browser redirect caching from upstream permanent redirects.
+        if (proxyRes.statusCode === 301 && proxyRes.headers.location) {
+          proxyRes.statusCode = 302;
+        }
+
         delete proxyRes.headers['access-control-allow-origin'];
         delete proxyRes.headers['access-control-allow-credentials'];
         delete proxyRes.headers['access-control-allow-methods'];
